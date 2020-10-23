@@ -88,7 +88,7 @@
 				var parsed = JSON.parse(this.response);
 				
 				document.getElementById("output").innerHTML = this.response;
-				showVideo(parsed.trailer_url.replace('/watch?v=', '/embed/'));
+				showVideo(parsed.Item.trailer_url.replace('/watch?v=', '/embed/'));
 			}
 
 			request.send()
