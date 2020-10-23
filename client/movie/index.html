@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<!--Author: Curt Falconi-->
+
+<head>
+	<meta property="og:title" content="C&I Capstone Group 2 Project">
+	<meta property="og:image" content="https://i.imgur.com/b7Ocmle.png">
+	<meta name="theme-color" content="#0082A7">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>C&I Capstone Database</title>
+	<link rel="icon" href="https://i.imgur.com/b7Ocmle.png">
+	<link rel="stylesheet" type="text/css" href="../CSS/apistyle1.css">
+	<h1>Lookup Movie ID</h1>
+	<label>Movie ID:</label>
+	<input type="text" id="movie_id" name="movie_id">
+	<input type="submit" onclick="lookupMovie()" value="Submit">
+	<br><br>
+	<h1>Lookup and Submit Movie</h1>
+	<label>Movie Title:</label>
+	<input type="text" id="movie_title" name="movie_title">
+	<input type="submit" onclick="lookupTitle()" value="Submit">
+	<br><br>
+	<h1>Submit Movie</h1>
+	<label>Movie ID:</label>
+	<input type="text" id="new_movie_id" name="new_movie_id">
+	<label>Title:</label>
+	<input type="text" id="title" name="title">
+	<label>Trailer URL:</label>
+	<input type="text" id="trailer_url" name="trailer_url">
+	<input type="submit" onclick="postMovie()" value="Submit">
+</head>
+
+<body>
+	<div class="raw">
+		<p id="output">
+
+		</p>
+	</div>
+
+
+	<script>
+		function lookupTitle() {
+			var request = new XMLHttpRequest()
+			var title = document.getElementById("movie_title").value;
+			
+			request.open('GET', 'http://3.208.10.4:3000/search?movie_title=' + title, true)
+			
+			request.onload = function () {
+				var obj = JSON.parse(this.response);
+				
+				if (obj.items.length > 0) {
+					var trailer_url = 'https://www.youtube.com/watch?v=' + obj.items[0].id.videoId;
+					var postRequest = new XMLHttpRequest()
+					var id = makeid(8);
+
+					postRequest.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + id + '&title=' + title + '&trailer_url=' + trailer_url, true)
+
+					postRequest.onload = function() {
+						document.getElementById("output").innerHTML = this.response + " Trailer ID: " + id;
+					}
+
+					postRequest.send()
+				}
+			}
+
+			request.send()
+		}
+
+		function lookupMovie() {
+
+			var request = new XMLHttpRequest()
+			var movie_id = document.getElementById("movie_id").value;
+
+			request.open('GET', 'http://3.208.10.4:3000/movie?movie_id=' + movie_id, true)
+
+			request.onload = function () {
+				document.getElementById("output").innerHTML = this.response;
+			}
+
+			request.send()
+		}
+
+		function makeid(length) {
+
+			var result = '';
+			var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+			var charactersLength = characters.length;
+			for (var i = 0; i < length; i++) {
+				result += characters.charAt(Math.floor(Math.random() * charactersLength));
+			}
+			return result;
+		}
+
+		function postMovie() {
+			var request = new XMLHttpRequest()
+			var movie_id = document.getElementById("new_movie_id").value;
+			var title = document.getElementById("title").value;
+			var trailer_url = document.getElementById("trailer_url").value;
+
+			request.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url, true)
+
+			document.getElementById("output").innerHTML = 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url;
+
+			request.onload = function () {
+				document.getElementById("output").innerHTML = this.response;
+			}
+
+			request.send()
+		}
+
+	</script>
+</body>
+
+</html>

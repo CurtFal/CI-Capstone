@@ -1,0 +1,155 @@
+/*Author: Curt Falconi*/
+.centersans
+{
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+	color: white;
+	border: 3px solid #f1f1f1;
+	position: absolute;
+	top: 15%;
+	left: 15%;
+	transform: translate(-5%, -25%);
+	z-index: 2;
+	width: 80%;
+	padding: 20px;
+	text-align:center;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size:2vw;
+}
+.centersans h1
+{
+	color:black;
+	font-size:5vw;
+	white-space: nowrap;
+	text-shadow: -1px -1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, 1px 1px 0 #FFFFFF;
+}
+.centersans h2
+{
+	color:black;
+	text-shadow: -1px -1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, 1px 1px 0 #FFFFFF;
+	font-size:2vw;
+	margin-top:-2%;
+}
+.centersans h3
+{
+	font-size:1.6vw;
+	text-align:center;
+	margin-top:-1.5%;
+}
+
+.centersans h4
+{
+	color:black;
+	font-size:1.5vw;
+	margin-top:-2%;
+}
+.txtbox
+{
+	margin-left:20%;
+	margin-right:20%;
+	text-align:left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:18px;
+	line-height:35px
+}
+
+
+
+/*Doesn't allow text to be highlighted, used for aesthetic reasons*/
+.noselect {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none;
+            user-select: none; 
+}
+
+/*Makes links fade to a different color when hovered over*/
+.centersans a {
+	text-decoration: none;
+	color:#FFFFFF;
+	-o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+  
+  transition:.5s;
+}
+
+.centersans a:hover { 
+color:#1100B7;
+text-shadow: -1px -1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, 1px 1px 0 #FFFFFF;
+}
+
+.imageicons
+{
+	text-align:center;
+	
+}
+
+.imageicons img:hover 
+{
+    outline: #333 solid 4px;
+	outline-color: #63DCFF;
+	-o-transition:.2s;
+	-ms-transition:.2s;
+	-moz-transition:.2s;
+	-webkit-transition:.2s;
+  
+  transition:.2s;
+}
+* {
+  box-sizing: border-box;
+}
+
+.bgimage {
+  background-image: url("https://i.imgur.com/QoziYDI.jpg");
+  filter: blur(6px);
+  -webkit-filter: blur(6px);
+  height: 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body{
+background-color:#FFFFFF;
+animation: LoopAnim 25s linear infinite;
+
+}
+@keyframes LoopAnim {
+
+0% { 
+background:#89A5FF;
+}
+25% { 
+background:#6780D2;
+}
+50% { 
+background:#5772CB;
+}
+75%
+{
+background:#6780D2;
+}
+100%
+{
+background:#89A5FF;
+}
+}
+
+footer {
+    background-color: #2B4498;
+	border-top: 2px solid grey;
+    left: 0;
+    bottom: 3;
+    height: 55px;
+	clear: both;
+    width: 100%;
+    overflow: hidden;
+	text-align:right;
+	position: absolute;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size:1vw;
+}

@@ -1,0 +1,49 @@
+version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.15
+  python: circleci/python@0.2.1
+
+parameters:
+  user:
+    type: string
+    default: ec2-user
+  host:
+    type: string
+    default: ec2-3-208-10-4.compute-1.amazonaws.com
+
+jobs:
+  deploy-client:
+    executor:
+      name: python/default
+    steps: 
+      - checkout
+      - aws-s3/copy:
+          arguments: '--recursive'
+          from: client
+          to: 's3://cicapstone2.com'
+  build-and-deploy-server:
+    docker: 
+      - image: circleci/node
+    steps:
+      - checkout
+      - run: cd server && npm install
+      - run:
+          name: Compress source
+          command: cd server && tar -zcf movie-server.tar.gz node_modules/ *.js
+      - add_ssh_keys:
+          fingerprints:
+            - "55:d3:f6:7e:61:cf:e4:6b:a4:f9:44:ed:44:e8:77:9d"
+      - run:
+          name: Upload to EC2
+          command: |
+            ssh-keyscan -H << pipeline.parameters.host >> >> ~/.ssh/known_hosts
+            ssh << pipeline.parameters.user >>@<< pipeline.parameters.host >> rm -rf opt/movie-server/*
+            scp server/movie-server.tar.gz << pipeline.parameters.user >>@<< pipeline.parameters.host >>:/opt/movie-server/
+            ssh << pipeline.parameters.user >>@<< pipeline.parameters.host >> "cd /opt/movie-server && tar -xzf movie-server.tar.gz && sudo systemctl restart movie-server.service"
+workflows:
+    server:
+      jobs:
+        - build-and-deploy-server
+    client:
+      jobs:
+        - deploy-client
