@@ -66,7 +66,7 @@
 
 					postRequest.onload = function () {
 						document.getElementById("output").innerHTML = this.response + " Movie ID: " + id;
-						showVideo(trailer_url);
+						showVideo('https://www.youtube.com/embed/' + obj.items[0].id.videoId);
 					}
 
 					postRequest.send()
@@ -86,7 +86,7 @@
 			request.onload = function () {
 				var parsed = JSON.parse(this.response);
 				
-				showVideo(parsed.trailer_url);
+				showVideo(parsed.trailer_url.replace('/watch?v=', '/embed/'));
 
 				document.getElementById("output").innerHTML = this.response;
 			}
