@@ -28,6 +28,7 @@
 	<label>Trailer URL:</label>
 	<input type="text" id="trailer_url" name="trailer_url">
 	<input type="submit" onclick="postMovie()" value="Submit">
+	<br>
 	<iframe id="player" width="560" height="315" frameborder="0"
 		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 		allowfullscreen></iframe>
@@ -86,9 +87,8 @@
 			request.onload = function () {
 				var parsed = JSON.parse(this.response);
 				
-				showVideo(parsed.trailer_url.replace('/watch?v=', '/embed/'));
-
 				document.getElementById("output").innerHTML = this.response;
+				showVideo(parsed.trailer_url.replace('/watch?v=', '/embed/'));
 			}
 
 			request.send()
