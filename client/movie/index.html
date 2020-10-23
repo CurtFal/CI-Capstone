@@ -56,7 +56,7 @@
 					postRequest.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + id + '&title=' + title + '&trailer_url=' + trailer_url, true)
 
 					postRequest.onload = function() {
-						document.getElementById("output").innerHTML = this.response + " Trailer ID: " + id;
+						document.getElementById("output").innerHTML = this.response + " Movie ID: " + id;
 					}
 
 					postRequest.send()
