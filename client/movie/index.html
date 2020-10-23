@@ -28,6 +28,9 @@
 	<label>Trailer URL:</label>
 	<input type="text" id="trailer_url" name="trailer_url">
 	<input type="submit" onclick="postMovie()" value="Submit">
+	<iframe id="player" width="560" height="315" frameborder="0"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		allowfullscreen></iframe>
 </head>
 
 <body>
@@ -39,15 +42,21 @@
 
 
 	<script>
+		function showVideo(trailer_url) {
+			var player = document.getElementById("player");
+
+			player.src = id;
+		}
+
 		function lookupTitle() {
 			var request = new XMLHttpRequest()
 			var title = document.getElementById("movie_title").value;
-			
+
 			request.open('GET', 'http://3.208.10.4:3000/search?movie_title=' + title, true)
-			
+
 			request.onload = function () {
 				var obj = JSON.parse(this.response);
-				
+
 				if (obj.items.length > 0) {
 					var trailer_url = 'https://www.youtube.com/watch?v=' + obj.items[0].id.videoId;
 					var postRequest = new XMLHttpRequest()
@@ -55,8 +64,9 @@
 
 					postRequest.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + id + '&title=' + title + '&trailer_url=' + trailer_url, true)
 
-					postRequest.onload = function() {
+					postRequest.onload = function () {
 						document.getElementById("output").innerHTML = this.response + " Movie ID: " + id;
+						showVideo(trailer_url);
 					}
 
 					postRequest.send()
@@ -74,6 +84,10 @@
 			request.open('GET', 'http://3.208.10.4:3000/movie?movie_id=' + movie_id, true)
 
 			request.onload = function () {
+				var parsed = JSON.parse(this.response);
+				
+				showVideo(parsed.trailer_url);
+
 				document.getElementById("output").innerHTML = this.response;
 			}
 
