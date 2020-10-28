@@ -25,7 +25,7 @@ app.get('/movie', (req, res) => {
             res.json(`Could not find ${req.query.movie_id}`)
         })
     } else {
-        res.json('what the fuck man')
+        res.json('Error!')
     }
 })
 
@@ -36,7 +36,7 @@ app.get('/search', (req, res) => {
             res.json(JSON.parse(body));
         });
     } else {
-        res.json('what the fuck man')
+        res.json('Error!')
     }
 })
 
@@ -47,7 +47,6 @@ app.post('/movie', (req, res) => {
             title: req.query.title,
             trailer_url: req.query.trailer_url,
             updated_on: new Date().toString(),
-            updated_by: "Curt Falconi"
         }).then(() => {
             res.json('Success')
         });
