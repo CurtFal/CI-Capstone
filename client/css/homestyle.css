@@ -153,3 +153,7 @@ footer {
 	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-size:1vw;
 }
+
+.footer p{
+	margin-right: 1%;
+}
