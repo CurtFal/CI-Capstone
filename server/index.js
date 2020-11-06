@@ -55,19 +55,11 @@ app.get('/search', (req, res) => {
         request.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&query=${req.query.movie_title}`, (error, re, body) => {
             tmdb = JSON.parse(body);
             respond();
-        }
+        });
     }
 })
 
-/*app.get('/searchimdb', (req, res) => {
-    if(req.query.movie_title){
-        request.get(`https://imdb-api.com/API/SearchTitle/k_3gry78ih/${req.query.movie_title}`,(error, response, body) => {
-            res.json(JSON.parse(body));
-    });
-    } else { 
-        res.json('Error! (imdb)')
-    }
-}) */
+
 
 app.post('/movie', (req, res) => {
     if (req.query.movie_id && req.query.title && req.query.trailer_url) {
