@@ -75,7 +75,7 @@
 
 					postRequest.onload = function () {
 						document.getElementById("output").innerHTML = this.response + " Movie ID: " + imdb.id;
-						showVideo('https://www.youtube.com/embed/' + youtube.id.videoId, tmdb.image);
+						showVideo('https://www.youtube.com/embed/' + youtube.id.videoId, poster_url);
 					}
 
 					postRequest.send();
