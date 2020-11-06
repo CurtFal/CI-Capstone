@@ -32,13 +32,13 @@ app.get('/movie', (req, res) => {
 
 app.get('/search', (req, res) => {
     if (req.query.movie_title) {
-        response = undefined;        
+        yt = undefined;        
 
         request.get(`https://www.googleapis.com/youtube/v3/search?maxResults=1&type=video&safeSearch=moderate&q=${req.query.movie_title}%20movie%20trailer&key=${process.env.GOOGLE_API_KEY}`, (error, re, body) => {
-            response = body
+            yt = body
         }).then(() => {
             request.get(`https://imdb-api.com/API/SearchTitle/k_3gry78ih/${req.query.movie_title}`,(error, re, body) => {
-                res.json(JSON.parse({ youtube: response, imdb: body}));
+                res.json(JSON.parse({ youtube: yt, imdb: body}));
             });
         });
     } 

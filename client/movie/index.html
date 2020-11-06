@@ -58,16 +58,16 @@
 			request.onload = function () {
 				var obj = JSON.parse(this.response);
 
-				if (obj.items.length > 0) {
-					var trailer_url = 'https://www.youtube.com/watch?v=' + obj.items[0].id.videoId;
+				if (obj.youtube.items.length > 0 && obj.imdb.results.length > 0) {
+					var trailer_url = 'https://www.youtube.com/watch?v=' + obj.youtube.items[0].id.videoId;
 					var postRequest = new XMLHttpRequest()
-					var id = makeid(8);
+					var id = obj.imdb.results[0].id
 
 					postRequest.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + id + '&title=' + title + '&trailer_url=' + trailer_url, true)
 
 					postRequest.onload = function () {
 						document.getElementById("output").innerHTML = this.response + " Movie ID: " + id;
-						showVideo('https://www.youtube.com/embed/' + obj.items[0].id.videoId);
+						showVideo('https://www.youtube.com/embed/' + obj.youtube.items[0].id.videoId);
 					}
 
 					postRequest.send()
