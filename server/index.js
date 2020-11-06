@@ -69,7 +69,7 @@ app.post('/movie', (req, res) => {
             trailer_url: req.query.trailer_url,
             description: req.query.description,
             updated_on: new Date().toString(),
-            poster_url: req.query.poster
+            poster_url: req.query.poster_url
         }).then(() => {
             res.json('Success')
         });
