@@ -36,8 +36,8 @@ app.get('/search', (req, res) => {
         imdb = undefined;
 
         respond = () => {
-            if (imdb && yt) {
-                res.json({ youtube: yt, imdb: imdb });
+            if (imdb && yt && tmbd) {
+                res.json({ youtube: yt, imdb: imdb, tmdb: tmdb });
             }
         }
 
@@ -46,10 +46,15 @@ app.get('/search', (req, res) => {
             respond();
         });
         
-        request.get(`https://imdb-api.com/API/SearchTitle/k_3gry78ih/${req.query.movie_title}`, (error, re, body) => {
+        request.get(`https://imdb-api.com/API/SearchTitle/${process.env.IMDB_KEY}/${req.query.movie_title}`, (error, re, body) => {
             imdb = JSON.parse(body);
             respond();
         });
+
+        request.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&query=${req.query.movie_title}`, (error, re, body) => {
+            tmdb = JSON.parse(body);
+            respond();
+        }
     }
 })
 
@@ -69,7 +74,9 @@ app.post('/movie', (req, res) => {
             movie_id: req.query.movie_id,
             title: req.query.title,
             trailer_url: req.query.trailer_url,
+            description: req.query.description,
             updated_on: new Date().toString(),
+            poster_url: req.query.poster
         }).then(() => {
             res.json('Success')
         });

@@ -62,17 +62,19 @@
 				console.log(this.response)
 				var obj = JSON.parse(this.response);
 
-				if (obj.youtube.items.length > 0 && obj.imdb.results.length > 0) {
+				if (obj.youtube.items.length > 0 && obj.imdb.results.length > 0 && obj.tmdb.results.length > 0) {
 					var youtube = obj.youtube.items[0];
 					var trailer_url = 'https://www.youtube.com/watch?v=' + youtube.id.videoId;
 					var postRequest = new XMLHttpRequest();
 					var imdb = obj.imdb.results[0];
+					var tmdb = obj.tmdb.results[0];
+					var poster_url = 'https://image.tmdb.org/t/p/w500_and_h750_face' + tmdb.results.poster_path;
 
 					postRequest.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + imdb.id + '&title=' + imdb.title + '&trailer_url=' + trailer_url, true)
 
 					postRequest.onload = function () {
 						document.getElementById("output").innerHTML = this.response + " Movie ID: " + imdb.id;
-						showVideo('https://www.youtube.com/embed/' + youtube.id.videoId, imdb.image);
+						showVideo('https://www.youtube.com/embed/' + youtube.id.videoId, tmdb.image);
 					}
 
 					postRequest.send();
@@ -99,24 +101,14 @@
 			request.send()
 		}
 
-		/*function makeid(length) {
-
-			var result = '';
-			var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-			var charactersLength = characters.length;
-			for (var i = 0; i < length; i++) {
-				result += characters.charAt(Math.floor(Math.random() * charactersLength));
-			}
-			return result;
-		} */
-
 		function postMovie() {
 			var request = new XMLHttpRequest()
 			var movie_id = document.getElementById("new_movie_id").value;
 			var title = document.getElementById("title").value;
 			var trailer_url = document.getElementById("trailer_url").value;
 
-			request.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url, true)
+			request.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url
+			+ description + '&description' + poster_url + '&poster_url', true)
 
 			document.getElementById("output").innerHTML = 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url;
 
