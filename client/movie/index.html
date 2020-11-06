@@ -50,18 +50,19 @@
 		}
 
 		function lookupTitle() {
-			var request = new XMLHttpRequest()
+			var request = new XMLHttpRequest();
 			var title = document.getElementById("movie_title").value;
 
-			request.open('GET', 'http://3.208.10.4:3000/search?movie_title=' + title, true)
+			request.open('GET', 'http://3.208.10.4:3000/search?movie_title=' + title, true);
 
 			request.onload = function () {
+				console.log(this.response)
 				var obj = JSON.parse(this.response);
 
 				if (obj.youtube.items.length > 0 && obj.imdb.results.length > 0) {
 					var trailer_url = 'https://www.youtube.com/watch?v=' + obj.youtube.items[0].id.videoId;
-					var postRequest = new XMLHttpRequest()
-					var id = obj.imdb.results[0].id
+					var postRequest = new XMLHttpRequest();
+					var id = obj.imdb.results[0].id;
 
 					postRequest.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + id + '&title=' + title + '&trailer_url=' + trailer_url, true)
 
@@ -70,11 +71,11 @@
 						showVideo('https://www.youtube.com/embed/' + obj.youtube.items[0].id.videoId);
 					}
 
-					postRequest.send()
+					postRequest.send();
 				}
 			}
 
-			request.send()
+			request.send();
 		}
 
 		function lookupMovie() {
