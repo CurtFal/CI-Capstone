@@ -32,13 +32,27 @@ app.get('/movie', (req, res) => {
 
 app.get('/search', (req, res) => {
     if (req.query.movie_title) {
-        request.get(`https://www.googleapis.com/youtube/v3/search?maxResults=1&type=video&safeSearch=moderate&q=${req.query.movie_title}%20movie%20trailer&key=${process.env.GOOGLE_API_KEY}`, (error, response, body) => {
-            res.json(JSON.parse(body));
+        response = undefined;        
+
+        request.get(`https://www.googleapis.com/youtube/v3/search?maxResults=1&type=video&safeSearch=moderate&q=${req.query.movie_title}%20movie%20trailer&key=${process.env.GOOGLE_API_KEY}`, (error, re, body) => {
+            response = body
+        }).then(() => {
+            request.get(`https://imdb-api.com/API/SearchTitle/k_3gry78ih/${req.query.movie_title}`,(error, re, body) => {
+                res.json(JSON.parse({ youtube: response, imdb: body}));
+            });
         });
-    } else {
-        res.json('Error!')
-    }
+    } 
 })
+
+/*app.get('/searchimdb', (req, res) => {
+    if(req.query.movie_title){
+        request.get(`https://imdb-api.com/API/SearchTitle/k_3gry78ih/${req.query.movie_title}`,(error, response, body) => {
+            res.json(JSON.parse(body));
+    });
+    } else { 
+        res.json('Error! (imdb)')
+    }
+}) */
 
 app.post('/movie', (req, res) => {
     if (req.query.movie_id && req.query.title && req.query.trailer_url) {
@@ -52,5 +66,9 @@ app.post('/movie', (req, res) => {
         });
     }
 })
+
+
+
+
 
 app.listen(3000)
