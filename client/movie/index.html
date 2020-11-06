@@ -111,11 +111,11 @@
 
 			request.open('POST', query_string, true)
 
-			document.getElementById("output").innerHTML = query_string;
-			
+
 			request.onload = function () {
 				document.getElementById("output").innerHTML = this.response;
 			}
+			document.getElementById("output").innerHTML = query_string;
 
 			request.send()
 		}
