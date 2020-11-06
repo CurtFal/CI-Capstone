@@ -69,8 +69,10 @@
 					var imdb = obj.imdb.results[0];
 					var tmdb = obj.tmdb.results[0];
 					var poster_url = 'https://image.tmdb.org/t/p/w500_and_h750_face' + tmdb.poster_path;
+					var query_string = 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url
+						+ tmdb.description + '&description' + poster_url + '&poster_url'
 
-					postRequest.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + imdb.id + '&title=' + imdb.title + '&trailer_url=' + trailer_url, true)
+					postRequest.open('POST', poster_url, true)
 
 					postRequest.onload = function () {
 						document.getElementById("output").innerHTML = this.response + " Movie ID: " + imdb.id;
@@ -107,7 +109,6 @@
 			var title = document.getElementById("title").value;
 			var trailer_url = document.getElementById("trailer_url").value;
 			var query_string = 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url
-			+ description + '&description' + poster_url + '&poster_url'
 
 			request.open('POST', query_string, true)
 
