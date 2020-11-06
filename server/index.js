@@ -37,7 +37,7 @@ app.get('/search', (req, res) => {
         tmdb = undefined;
 
         respond = () => {
-            if (imdb && yt && tmbd) {
+            if (imdb && yt && tmdb) {
                 res.json({ youtube: yt, imdb: imdb, tmdb: tmdb });
             }
         }
