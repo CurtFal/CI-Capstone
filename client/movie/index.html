@@ -68,7 +68,7 @@
 					var postRequest = new XMLHttpRequest();
 					var imdb = obj.imdb.results[0];
 					var tmdb = obj.tmdb.results[0];
-					var poster_url = 'https://image.tmdb.org/t/p/w500_and_h750_face' + tmdb.results.poster_path;
+					var poster_url = 'https://image.tmdb.org/t/p/w500_and_h750_face' + tmdb.poster_path;
 
 					postRequest.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + imdb.id + '&title=' + imdb.title + '&trailer_url=' + trailer_url, true)
 
