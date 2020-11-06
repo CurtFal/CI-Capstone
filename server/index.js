@@ -62,7 +62,7 @@ app.get('/search', (req, res) => {
 
 
 app.post('/movie', (req, res) => {
-    if (req.query.movie_id && req.query.title && req.query.trailer_url) {
+    if (req.query.movie_id && req.query.title && req.query.trailer_url && req.query.description && req.query.poster_url) {
         database.save({
             movie_id: req.query.movie_id,
             title: req.query.title,

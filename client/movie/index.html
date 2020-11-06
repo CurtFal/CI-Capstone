@@ -106,12 +106,13 @@
 			var movie_id = document.getElementById("new_movie_id").value;
 			var title = document.getElementById("title").value;
 			var trailer_url = document.getElementById("trailer_url").value;
+			var query_string = 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url
+			+ description + '&description' + poster_url + '&poster_url'
 
-			request.open('POST', 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url
-			+ description + '&description' + poster_url + '&poster_url', true)
+			request.open('POST', query_string, true)
 
-			document.getElementById("output").innerHTML = 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url;
-
+			document.getElementById("output").innerHTML = query_string;
+			
 			request.onload = function () {
 				document.getElementById("output").innerHTML = this.response;
 			}
