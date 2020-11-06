@@ -34,6 +34,7 @@ app.get('/search', (req, res) => {
     if (req.query.movie_title) {
         yt = undefined;
         imdb = undefined;
+        tmdb = undefined;
 
         respond = () => {
             if (imdb && yt && tmbd) {
