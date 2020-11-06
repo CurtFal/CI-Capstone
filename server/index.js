@@ -32,16 +32,25 @@ app.get('/movie', (req, res) => {
 
 app.get('/search', (req, res) => {
     if (req.query.movie_title) {
-        yt = undefined;        
+        yt = undefined;
+        imdb = undefined;
+
+        respond = () => {
+            if (imdb && yt) {
+                res.json({ youtube: yt, imdb: imdb });
+            }
+        }
 
         request.get(`https://www.googleapis.com/youtube/v3/search?maxResults=1&type=video&safeSearch=moderate&q=${req.query.movie_title}%20movie%20trailer&key=${process.env.GOOGLE_API_KEY}`, (error, re, body) => {
-            yt = body
-        }).then(() => {
-            request.get(`https://imdb-api.com/API/SearchTitle/k_3gry78ih/${req.query.movie_title}`,(error, re, body) => {
-                res.json(JSON.parse({ youtube: yt, imdb: body}));
-            });
+            yt = JSON.parse(body);
+            respond();
         });
-    } 
+        
+        request.get(`https://imdb-api.com/API/SearchTitle/k_3gry78ih/${req.query.movie_title}`, (error, re, body) => {
+            imdb = JSON.parse(body);
+            respond();
+        });
+    }
 })
 
 /*app.get('/searchimdb', (req, res) => {
