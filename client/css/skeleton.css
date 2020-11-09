@@ -234,6 +234,7 @@ input[type="url"],
 input[type="password"],
 textarea,
 select {
+  margin-left: 1%;
   height: 38px;
   padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
   background-color: #fff;
@@ -270,6 +271,7 @@ select:focus {
   outline: 0; }
 label,
 legend {
+  margin-left: 1%;
   display: block;
   margin-bottom: .5rem;
   font-weight: 600; }
