@@ -31,7 +31,7 @@ app.get('/movie', (req, res) => {
 
 const query = (api) => {
     return new Promise((resolve, reject) => {
-        request.get(api, (error, re, body) => {
+        request.get(api, (error, response, body) => {
             resolve(JSON.parse(body));
         });
     });
@@ -47,7 +47,7 @@ app.get('/search', (req, res) => {
         imdb = query(`https://imdb-api.com/API/SearchMovie/${process.env.IMDB_KEY}/${title}%20(${year})`)
         tmdb = query(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&query=${title}&year=${year}`)
 
-        Promise.all(yt, imdb, tmdb).then((values) => {
+        Promise.all([yt, imdb, tmdb]).then((values) => {
             res.json({ youtube: values[0], imdb: values[1], tmdb: values[2] })
         })
     }
