@@ -18,14 +18,14 @@
 	<h1>Lookup Movie ID</h1>
 	<label>Movie ID:</label>
 	<input type="text" id="movie_id" name="movie_id">
-	<input type="submit" onclick="lookupMovie()" value="Submit">
+	<input type="submit" onclick="lookupMovie()" value="Lookup">
 	<br><br>
 	<h1>Add a movie to the DB</h1>
 	<label for="add">Movie Title:</label>
 	<input type="text" id="movie_title" name="movie_title">
 	<label for="add">Year Released:</label>
 	<input type="number" id="movie_year" name="movie_year">
-	<input type="submit" onclick="lookupTitle()" value="Submit">
+	<input type="submit" onclick="lookupTitle()" value="Search and Add">
 	<br><br>
 	<br>
 	<iframe id="player" width="560" height="315" frameborder="0"
@@ -55,7 +55,7 @@
 		var title = document.getElementById("movie_title").value;
 		var year = document.getElementById("movie_year").value;
 
-		request.open('GET', 'http://3.208.10.4:3000/search?movie_title=' + title + 'movie_year=' + movie_year, true);
+		request.open('GET', 'http://3.208.10.4:3000/search?movie_title=' + title + '%20movie_year=' + year, true);
 
 		request.onload = function () {
 			console.log(this.response)
