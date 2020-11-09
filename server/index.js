@@ -39,34 +39,17 @@ const query = (api) => {
 
 app.get('/search', (req, res) => {
     if (req.query.movie_title) {
-        yt = undefined;
-        imdb = undefined;
-        tmdb = undefined;
+        title = req.query.movie_title
+        year = req.query.movie_year
 
+        yt = query(`https://www.googleapis.com/youtube/v3/search?maxResults=1&type=video&safeSearch=moderate&q=${title}
+            %20movie%20trailer%20${year}&key=${process.env.GOOGLE_API_KEY}`)
+        imdb = query(`https://imdb-api.com/API/SearchMovie/${process.env.IMDB_KEY}/${title}%20(${year})`)
+        tmdb = query(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&query=${title}&year=${year}`)
 
-        respond = () => {
-            if (imdb && yt && tmdb) {
-                res.json({ youtube: yt, imdb: imdb, tmdb: tmdb });
-            }
-        }
-
-        youtube = query(`https://www.googleapis.com/youtube/v3/search?maxResults=1&type=video&safeSearch=moderate&q=${req.query.movie_title}
-        %20movie%20trailer%20${req.query.movie_year}&key=${process.env.GOOGLE_API_KEY}`)
-
-        // request.get(, (error, re, body) => {
-        //     yt = JSON.parse(body);
-        //     respond();
-        // });
-
-        request.get(`https://imdb-api.com/API/SearchMovie/${process.env.IMDB_KEY}/${req.query.movie_title}%20(${req.query.movie_year})`, (error, re, body) => {
-            imdb = JSON.parse(body);
-            respond();
-        });
-
-        request.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&query=${req.query.movie_title}&year=${req.query.movie_year}`, (error, re, body) => {
-            tmdb = JSON.parse(body);
-            respond();
-        });
+        Promise.all(yt, idmb, tmdb).then((values) => {
+            res.json({ youtube: values[0], imdb: values[1], tmdb: values[2] })
+        })
     }
 })
 
