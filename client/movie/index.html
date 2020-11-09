@@ -61,6 +61,8 @@
 			console.log(this.response)
 			var obj = JSON.parse(this.response);
 
+			console.log(obj)
+
 			if (obj.youtube.items.length > 0 && obj.imdb.results.length > 0 && obj.tmdb.results.length > 0) {
 				var youtube = obj.youtube.items[0];
 				var trailer_url = 'https://www.youtube.com/watch?v=' + youtube.id.videoId;
