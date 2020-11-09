@@ -42,10 +42,9 @@ app.get('/search', (req, res) => {
     year = req.query.movie_year
 
     if (title) {
-        yt = query(`https://www.googleapis.com/youtube/v3/search?maxResults=1&type=video&safeSearch=moderate&q=${title}
-            %20movie%20trailer%20${year}&key=${process.env.GOOGLE_API_KEY}`)
+        yt = query(`https://www.googleapis.com/youtube/v3/search?maxResults=1&type=video&safeSearch=moderate&q=${title}%20movie%20trailer%20${year}&key=${process.env.GOOGLE_API_KEY}`)
         imdb = query(`https://imdb-api.com/API/SearchMovie/${process.env.IMDB_KEY}/${title}%20(${year})`)
-        tmdb = query(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&query=${title}&year=${year}`)
+        tmdb = query(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&query=${title}&primary_release_year=${year}`)
 
         Promise.all([yt, imdb, tmdb]).then((values) => {
             res.json({ youtube: values[0], imdb: values[1], tmdb: values[2] })
