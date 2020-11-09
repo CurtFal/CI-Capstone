@@ -47,7 +47,7 @@ app.get('/search', (req, res) => {
         tmdb = query(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&query=${title}&primary_release_year=${year}`)
 
         Promise.all([yt, imdb, tmdb]).then((values) => {
-            res.json({ youtube: values[0], imdb: values[1], tmdb: values[2] })
+            res.json({ youtube: values[0], imdb: values[1], tmdb: values[2], query: `https://api.themoviedb.org/3/search/movie?api_key=*******&query=${title}&primary_release_year=${year}`})
         })
     }
 })
