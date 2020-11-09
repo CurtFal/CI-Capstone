@@ -55,11 +55,11 @@
 		var title = document.getElementById("movie_title").value;
 		var year = document.getElementById("movie_year").value;
 
-		request.open('GET', 'http://3.208.10.4:3000/search?movie_title=' + title + '%20?movie_year=' + year, true);
+		request.open('GET', 'http://3.208.10.4:3000/search?movie_title=' + title + '&movie_year=' + year, true);
 
 		request.onload = function () {
-			console.log(this.response)
 			var obj = JSON.parse(this.response);
+			console.log(obj)
 
 			if (obj.youtube.items.length > 0 && obj.imdb.results.length > 0 && obj.tmdb.results.length > 0) {
 				var youtube = obj.youtube.items[0];
