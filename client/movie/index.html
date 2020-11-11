@@ -15,6 +15,7 @@
 </head>
 
 <body>
+	<h4 style="text-align: left;"><a href="../index.html">Return to the Home Page</a></h4>
 	<h1>Lookup Movie ID</h1>
 	<label>Movie ID:</label>
 	<input type="text" id="movie_id" name="movie_id">
@@ -28,13 +29,18 @@
 	<input type="submit" onclick="lookupTitle()" value="Search and Add">
 	<br><br>
 	<br>
+	<div class="results">
 	<iframe id="player" width="560" height="315" frameborder="0"
 		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 		allowfullscreen></iframe>
 	<img id="poster" height="450" width="300" />
+	</div>
+	
 
 	<div class="raw">
 		<p id="output">
+
+	
 
 		</p>
 	</div>

@@ -1,0 +1,15 @@
+/*Author: Curt Falconi*/
+.results{
+    text-align: center;
+}
+
+.results img{
+    border: 3px;
+    border-color: #524E4E;
+    margin-left: auto;
+}
+
+h1,h4{
+    text-align: left;
+    margin-left: 1%;
+}
