@@ -125,26 +125,27 @@ animation: LoopAnim 25s linear infinite;
 @keyframes LoopAnim {
 
 0% { 
-background:#89A5FF;
+background:#F4F2FF;
 }
 25% { 
-background:#6780D2;
+background:#F0EDFE;
 }
 50% { 
-background:#5772CB;
+background:#D8D1F8;
 }
 75%
 {
-background:#6780D2;
+background:#F0EDFE;
 }
 100%
 {
-background:#89A5FF;
+background:#F4F2FF;
 }
 }
 
 footer {
-    background-color: #2B4498;
+	background: rgb(184,200,255);
+	background: radial-gradient(circle, rgba(184,200,255,1) 80%, rgba(215,206,255,1) 100%); 
 	border-top: 2px solid grey;
     left: 0;
     bottom: 3;

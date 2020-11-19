@@ -3,13 +3,16 @@
 }
 
 .results img,iframe{
-    border: 2px;
-    border-color: #524E4E;
-    border-style: solid;
+    box-shadow: 1px 1px 3px #000000;
 }
 
 .results img{
     margin-left: 5%;
+    background-image:url("../images/input2.png")
+}
+
+.results iframe{
+    background-image:url("../images/input1.png");
 }
 
 
@@ -25,7 +28,8 @@ body{
 }
 
 footer {
-    background-color: #2B4498;
+    background: rgb(184,200,255);
+    background: radial-gradient(circle, rgba(184,200,255,1) 80%, rgba(215,206,255,1) 100%); 
 	border-top: 2px solid grey;
     left: 0;
     bottom: 3;
@@ -42,11 +46,10 @@ footer {
 
 .container {
     width: 90%;
-    height: 500px;
-    background-image: linear-gradient(to bottom, #D8D1F8, #FFFFFF );
-    border: #8DE6FF;
+    height: 450px;
     padding: 10px;
     border-radius: 25px;
+    box-shadow: 1px 1px 3px #000000;
   }
   
   .one {
