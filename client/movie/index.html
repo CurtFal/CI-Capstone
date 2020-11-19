@@ -15,17 +15,26 @@
 
 <body>
 	<h4 style="text-align: left;"><a href="../index.html">Return to the Home Page</a></h4>
-	<h1><u>Lookup Movie ID</u></h1>
-	<label>Movie ID:</label>
-	<input type="text" id="movie_id" name="movie_id">
-	<input type="submit" onclick="lookupMovie()" value="Lookup">
-	<br><br>
-	<h1><u>Add a movie to the DB</u></h1>
-	<label for="add">Movie Title:</label>
-	<input type="text" id="movie_title" name="movie_title">
-	<label for="add">Year Released:</label>
-	<input type="number" id="movie_year" name="movie_year">
-	<input type="submit" onclick="lookupTitle()" value="Search and Add">
+	<section class="container">
+		<div class="one">
+			<h1><u>Lookup Movie ID</u></h1>
+			<p>Enter a movie ID from IMDB here to search for a film within the database!</p>
+			<label>Movie ID:</label>
+			<input type="text" id="movie_id" name="movie_id">
+			<input type="submit" onclick="lookupMovie()" value="Lookup">	
+		</div>
+		<div class="two">
+			<h1><u>Add a movie to the DB</u></h1>
+			<p>Enter a movie title here to add it to the DynamoDB. The year entry is optional.</p>
+			<label for="add">Movie Title:</label>
+			<input type="text" id="movie_title" name="movie_title">
+			<label for="add">Year Released:</label>
+			<input type="number" id="movie_year" name="movie_year">
+			<input type="submit" onclick="lookupTitle()" value="Search and Add">
+		</div>
+	</section>
+	
+	
 	<br><br>
 	<br>
 	<div class="results">

@@ -2,13 +2,19 @@
     text-align: center;
 }
 
-.results img{
-    border: 3px;
+.results img,iframe{
+    border: 2px;
     border-color: #524E4E;
-    margin-left: auto;
+    border-style: solid;
 }
 
-h1,h4{
+.results img{
+    margin-left: 5%;
+}
+
+
+
+h1,h4,p{
     text-align: left;
     margin-left: 1%;
     text-underline-position: auto;
@@ -33,3 +39,23 @@ footer {
     font-size:1vw;
     color: black;
 }
+
+.container {
+    width: 90%;
+    height: 500px;
+    background-image: linear-gradient(to bottom, #D8D1F8, #FFFFFF );
+    border: #8DE6FF;
+    padding: 10px;
+    border-radius: 25px;
+  }
+  
+  .one {
+    width: 50%;
+    height: 500px;
+    float: left;
+  }
+  
+  .two {
+    margin-left: 50%;
+    height: 500px;
+  }
