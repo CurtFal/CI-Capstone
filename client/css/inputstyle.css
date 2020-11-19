@@ -15,27 +15,21 @@ h1,h4{
 }
 
 body{
-    background-color:#FFFFFF;
-    animation: LoopAnim 25s linear infinite;
-    
-    }
-    @keyframes LoopAnim {
-    
-    0% { 
-    background:#E5A9F4;
-    }
-    25% { 
-    background:#F4A9EE;
-    }
-    50% { 
-    background:#F4A9C0;
-    }
-    75%
-    {
-    background:#F4A9EE;
-    }
-    100%
-    {
-    background:#E5A9F4;
-    }
-    }
+    background-image: linear-gradient(to bottom, #FFFFFF, #D8D1F8);
+}
+
+footer {
+    background-color: #2B4498;
+	border-top: 2px solid grey;
+    left: 0;
+    bottom: 3;
+    height: 55px;
+	clear: both;
+    width: 100%;
+    overflow: hidden;
+    text-align:right;
+	position: absolute;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size:1vw;
+    color: black;
+}

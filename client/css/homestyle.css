@@ -84,7 +84,8 @@ text-shadow: -1px -1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, 1px 1p
 .imageicons
 {
 	text-align:center;
-	
+	overflow: hidden;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 .imageicons img:hover 
@@ -99,7 +100,11 @@ text-shadow: -1px -1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, 1px 1p
   transition:.2s;
 }
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+figure{
+	display: inline-block;
 }
 
 .bgimage {
