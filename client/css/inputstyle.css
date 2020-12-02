@@ -54,7 +54,7 @@ footer {
 
 .container {
     width: 90%;
-    height: 450px;
+    height: 440px;
     padding: 10px;
     border-radius: 25px;
     box-shadow: 1px 1px 3px #000000;
@@ -71,10 +71,20 @@ footer {
     height: 500px;
   }
 
+.desc{
+    width: 50%;
+    height: auto;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 3px #000000;
+    margin: auto;
+    background-color: #d8d1f89d;
+}
 .desc p{
-    width:50%;
     height:100px;
-    margin-left: 25%;
+    margin: auto;
+    font-size: 18px;
+    text-align: left;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -82,4 +92,8 @@ footer {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     text-decoration: underline;
+}
+
+.raw p{
+    color: green;
 }

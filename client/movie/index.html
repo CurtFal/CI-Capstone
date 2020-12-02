@@ -15,7 +15,7 @@
 
 <body>
 	<h4 style="text-align: left;"><a href="../index.html">Return to the Home Page</a></h4>
-	<h5><b>DynamoDB Interface</b></h5>
+	<h5><b>Movie Database Interface</b></h5>
 	<section class="container">
 		<div class="one">
 			<h1><u>Lookup Movie ID</u></h1>
@@ -26,7 +26,7 @@
 		</div>
 		<div class="two">
 			<h1><u>Add a movie to the DB</u></h1>
-			<p>Enter a movie title here to add it to the DynamoDB. The year entry is optional.</p>
+			<p>Enter a movie title here to add it to the Database. The year entry is optional.</p>
 			<label for="add">Movie Title:</label>
 			<input type="text" id="movie_title" name="movie_title">
 			<label for="add">Year Released:</label>
@@ -56,6 +56,7 @@
 		<p id="desc">
 		</p>
 	</div>
+	<br><br>
 </body>
 <div class="footer">
 	<footer>
@@ -124,7 +125,8 @@
 		request.onload = function () {
 			var parsed = JSON.parse(this.response);
 
-			document.getElementById("output").innerHTML = this.response;
+			/*document.getElementById("output").innerHTML = this.response;*/
+			document.getElementById("title").innerHTML = parsed.Item.title;
 			document.getElementById("desc").innerHTML = parsed.Item.overview;
 			showVideo(parsed.Item.trailer_url.replace('/watch?v=', '/embed/'), parsed.Item.poster_url);
 		}
