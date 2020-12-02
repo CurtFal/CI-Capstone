@@ -74,6 +74,7 @@ footer {
 .desc{
     width: 50%;
     height: auto;
+    position: relative;
     padding: 15px;
     border-radius: 20px;
     box-shadow: 1px 1px 3px #000000;
@@ -81,7 +82,7 @@ footer {
     background-color: #d8d1f89d;
 }
 .desc p{
-    height:100px;
+    height: auto;
     margin: auto;
     font-size: 18px;
     text-align: left;
