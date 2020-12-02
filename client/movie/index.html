@@ -43,14 +43,17 @@
 		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 		allowfullscreen></iframe>
 	<img id="poster" height="450" width="300" />
+	<br>
 	</div>
 	
 
 	<div class="raw">
 		<p id="output">
-
-	
-
+		</p>
+	</div>
+	<div class="desc">
+		<h1 id="title"></h1>
+		<p id="desc">
 		</p>
 	</div>
 </body>
@@ -61,12 +64,14 @@
 	</footer>
 
 <script>
-	function showVideo(trailer_url, img) {
+	function showVideo(trailer_url, img, overview) {
 		var player = document.getElementById("player");
 		var poster = document.getElementById("poster");
+		var desc = document.getElementById("desc");
 
 		player.src = trailer_url;
 		poster.src = img;
+		desc.src = overview;
 	}
 
 	function lookupTitle() {
@@ -83,16 +88,19 @@
 			if (obj.youtube.items.length > 0 && obj.imdb.results.length > 0 && obj.tmdb.results.length > 0) {
 				var youtube = obj.youtube.items[0];
 				var trailer_url = 'https://www.youtube.com/watch?v=' + youtube.id.videoId;
+				var overview = obj.tmdb.results[0].overview;
 				var postRequest = new XMLHttpRequest();
 				var imdb = obj.imdb.results[0];
 				var tmdb = obj.tmdb.results[0];
 				var poster_url = 'https://image.tmdb.org/t/p/w220_and_h330_face' + tmdb.poster_path;
-				var query_string = `http://3.208.10.4:3000/movie?movie_id=${imdb.id}&title=${imdb.title}&trailer_url=${trailer_url}&description=${imdb.description}&poster_url=${poster_url}`
+				var query_string = `http://3.208.10.4:3000/movie?movie_id=${imdb.id}&title=${imdb.title}&trailer_url=${trailer_url}&description=${imdb.description}&poster_url=${poster_url}&overview=${tmdb.overview}`
 
 				postRequest.open('POST', query_string, true)
 
 				postRequest.onload = function () {
 					document.getElementById("output").innerHTML = this.response + " Movie ID: " + imdb.id;
+					document.getElementById("title").innerHTML = imdb.title;
+					document.getElementById("desc").innerHTML = overview;
 					showVideo('https://www.youtube.com/embed/' + youtube.id.videoId, poster_url);
 				}
 
@@ -117,6 +125,7 @@
 			var parsed = JSON.parse(this.response);
 
 			document.getElementById("output").innerHTML = this.response;
+			document.getElementById("desc").innerHTML = parsed.Item.overview;
 			showVideo(parsed.Item.trailer_url.replace('/watch?v=', '/embed/'), parsed.Item.poster_url);
 		}
 
@@ -128,7 +137,8 @@
 		var movie_id = document.getElementById("new_movie_id").value;
 		var title = document.getElementById("title").value;
 		var trailer_url = document.getElementById("trailer_url").value;
-		var query_string = 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url
+		var overview = document.getElementById("overview")
+		var query_string = 'http://3.208.10.4:3000/movie?movie_id=' + movie_id + '&title=' + title + '&trailer_url=' + trailer_url + '&overview=' + overview
 
 		request.open('POST', query_string, true)
 

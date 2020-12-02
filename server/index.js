@@ -60,14 +60,15 @@ app.get('/search', (req, res) => {
 
 
 app.post('/movie', (req, res) => {
-    if (req.query.movie_id && req.query.title && req.query.trailer_url && req.query.description && req.query.poster_url) {
+    if (req.query.movie_id && req.query.title && req.query.trailer_url && req.query.description && req.query.poster_url && req.query.overview) {
         database.save({
             movie_id: req.query.movie_id,
             title: req.query.title,
             trailer_url: req.query.trailer_url,
             description: req.query.description,
             updated_on: new Date().toString(),
-            poster_url: req.query.poster_url
+            poster_url: req.query.poster_url,
+            overview: req.query.overview
         }).then(() => {
             res.json('Success')
         });
