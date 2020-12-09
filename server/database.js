@@ -12,21 +12,14 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports.random = () => {
     let number = Math.floor(Math.random() * Math.random() * 9999999);
-    let id = 'tt0000000';
+    let id = 'tt' + number.toString().padStart(7, '0');
 
     let params = {
         TableName: "DataBase_CI",
-        Limit: 1,
-        ScanFilter: {
-            ComparisonOperator: 'GT',
-            AttributeValueList: {
-                S: id
-            }
+        FilterExpression: 'movie_id > :tt',
+        ExpressionAttributeValues: {
+            ':tt': id
         }
-        // KeyConditionExpression: 'movie_id > :id',
-        // ExpressionAttributeValues: {
-        //     ':id': id
-        // }
     };
 
     return new Promise((res, rej) => {
@@ -35,17 +28,11 @@ module.exports.random = () => {
                 rej(err);
             }
             else {
-                res(data);
+                res(data.Items[0]);
             }
         })
     });
 }
-
-// random().then((data) => {
-//     console.log(data);
-// }).catch((result) => {
-//     console.log(result)
-// });
 
 module.exports.read = (movie_id) => {
     let params = {
