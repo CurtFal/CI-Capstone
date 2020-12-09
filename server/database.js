@@ -33,7 +33,9 @@ module.exports.random = () => {
     // },
     //     "Limit": 1)
 
-    return new Promise((res, rej) => {
+    return id;
+    /**
+     * new Promise((res, rej) => {
         docClient.query(params, (err, data) => {
             if (err) {
                 rej(err);
@@ -43,6 +45,7 @@ module.exports.random = () => {
             }
         })
     });
+     */
 }
 
 module.exports.read = (movie_id) => {
