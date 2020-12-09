@@ -165,9 +165,9 @@
 			var parsed = JSON.parse(this.response);
 
 			/*document.getElementById("output").innerHTML = this.response;*/
-			document.getElementById("title").innerHTML = parsed.Item.title;
-			document.getElementById("desc").innerHTML = parsed.Item.overview;
-			showVideo(parsed.Item.trailer_url.replace('/watch?v=', '/embed/'), parsed.Item.poster_url);
+			document.getElementById("title").innerHTML = parsed.title;
+			document.getElementById("desc").innerHTML = parsed.overview;
+			showVideo(parsed.Item.trailer_url.replace('/watch?v=', '/embed/'), parsed.poster_url);
 		}
 
 		request.send()
