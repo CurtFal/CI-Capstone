@@ -156,7 +156,21 @@
 	}
 
 	function random(){
+		var request = new XMLHttpRequest()
+		var movie_id = document.getElementById("movie_id").value;
 
+		request.open('GET', 'http://3.208.10.4:3000/', true)
+
+		request.onload = function () {
+			var parsed = JSON.parse(this.response);
+
+			/*document.getElementById("output").innerHTML = this.response;*/
+			document.getElementById("title").innerHTML = parsed.Item.title;
+			document.getElementById("desc").innerHTML = parsed.Item.overview;
+			showVideo(parsed.Item.trailer_url.replace('/watch?v=', '/embed/'), parsed.Item.poster_url);
+		}
+
+		request.send()
 	}
 
 </script>

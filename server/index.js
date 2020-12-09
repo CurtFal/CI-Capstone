@@ -29,7 +29,7 @@ app.get('/movie', (req, res) => {
     }
 })
 
-app.get('/random', (req, res) => {
+app.get('/', (req, res) => {
     database.random().then((data) => {
         res.json(data);
     });
