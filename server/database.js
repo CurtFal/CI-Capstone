@@ -17,16 +17,16 @@ module.exports.random = () => {
     let params = {
         TableName: "DataBase_CI",
         Limit: 1,
-        // KeyConditions: {
-        //     'movie_id': {
-        //         ComparisonOperator: 'GT',
-        //         AttributeValueList: [{ 'S': id }]
-        //     }
-        // }
-        KeyConditionExpression: 'movie_id > :id',
-        ExpressionAttributeValues: {
-            ':id': id
+        KeyConditions: {
+            'movie_id': {
+                ComparisonOperator: 'GT',
+                AttributeValueList: [{ 'S': id }]
+            }
         }
+        // KeyConditionExpression: 'movie_id > :id',
+        // ExpressionAttributeValues: {
+        //     ':id': id
+        // }
     };
 
     return new Promise((res, rej) => {
