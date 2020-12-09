@@ -30,10 +30,9 @@ app.get('/movie', (req, res) => {
 })
 
 app.get('/random', (req, res) => {
-    res.json(database.random());
-    // database.random().then((data) => {
-    //     res.json(data);
-    // });
+    database.random().then((data) => {
+        res.json(data);
+    });
 })
 
 app.get('/search', (req, res) => {
