@@ -28,7 +28,7 @@ module.exports.random = () => {
                 rej(err);
             }
             else {
-                res(data.Items[0]);
+                res(data.Items[Math.floor(Math.random() * data.Items.length)]);
             }
         })
     });
