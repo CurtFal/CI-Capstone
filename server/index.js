@@ -29,18 +29,16 @@ app.get('/movie', (req, res) => {
     }
 })
 
-const query = (api) => {
-    return new Promise((resolve, reject) => {
-        request.get(api, (error, response, body) => {
-            resolve(JSON.parse(body));
-        });
+app.get('/random', (req, res) => {
+    database.random().then((data) => {
+        res.json(data);
     });
-}
+})
 
 app.get('/search', (req, res) => {
     title = req.query.movie_title
     year = req.query.movie_year
-    
+
     if (title) {
         yt = `https://www.googleapis.com/youtube/v3/search?maxResults=1&type=video&safeSearch=moderate&key=${process.env.GOOGLE_API_KEY}&q=${title}%20movie%20trailer`
         imdb = `https://imdb-api.com/API/SearchMovie/${process.env.IMDB_KEY}/${title}`
@@ -51,7 +49,7 @@ app.get('/search', (req, res) => {
             imdb += `%20(${year})`
             tmdb += `&primary_release_year=${year}`
         }
-        
+
         Promise.all([query(yt), query(imdb), query(tmdb)]).then((values) => {
             res.json({ youtube: values[0], imdb: values[1], tmdb: values[2] })
         })
@@ -78,8 +76,12 @@ app.post('/movie', (req, res) => {
     }
 })
 
-
-
-
+const query = (api) => {
+    return new Promise((resolve, reject) => {
+        request.get(api, (error, response, body) => {
+            resolve(JSON.parse(body));
+        });
+    });
+}
 
 app.listen(3000)
