@@ -11,42 +11,41 @@ AWS.config.update(awsConfig);
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports.random = () => {
-    let number = Math.random() * 9999999;
-    let id = number.toString().padStart(7 - number.length, '0');
+    let number = Math.floor(Math.random() * Math.random() * 9999999);
+    let id = 'tt' + number.toString().padStart(7, '0');
+
     let params = {
         TableName: "DataBase_CI",
         Limit: 1,
-        KeyConditions: {
-            'movie_id': {
-                ComparisonOperator: 'GT',
-                AttributeValueList: [{ 'S': id }]
-            }
+        // KeyConditions: {
+        //     'movie_id': {
+        //         ComparisonOperator: 'GT',
+        //         AttributeValueList: [{ 'S': id }]
+        //     }
+        // }
+        KeyConditionExpression: 'movie_id > :id',
+        ExpressionAttributeValues: {
+            ':id': id
         }
     };
 
-    // RandomRangeKey = new UUID
-    // RandomItem = Query("HashKeyValue": "KeyOfRandomItems",
-    //     "RangeKeyCondition": {
-    //         "AttributeValueList":
-    //             "RandomRangeKey",
-    //     "ComparisonOperator": "GT"
-    // },
-    //     "Limit": 1)
-
-    return id;
-    /**
-     * new Promise((res, rej) => {
+    return new Promise((res, rej) => {
         docClient.query(params, (err, data) => {
             if (err) {
                 rej(err);
             }
             else {
-                res({ data, id });
+                res(data);
             }
         })
     });
-     */
 }
+
+// random().then((data) => {
+//     console.log(data);
+// }).catch((result) => {
+//     console.log(result)
+// });
 
 module.exports.read = (movie_id) => {
     let params = {
