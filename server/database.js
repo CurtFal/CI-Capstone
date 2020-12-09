@@ -30,7 +30,7 @@ module.exports.random = () => {
     };
 
     return new Promise((res, rej) => {
-        docClient.query(params, (err, data) => {
+        docClient.scan(params, (err, data) => {
             if (err) {
                 rej(err);
             }
