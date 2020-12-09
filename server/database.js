@@ -12,7 +12,7 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports.random = () => {
     let number = Math.floor(Math.random() * Math.random() * 9999999);
-    let id = 'tt' + number.toString().padStart(7, '0');
+    let id = 'tt0000000';
 
     let params = {
         TableName: "DataBase_CI",
