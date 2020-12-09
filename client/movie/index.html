@@ -167,7 +167,7 @@
 			/*document.getElementById("output").innerHTML = this.response;*/
 			document.getElementById("title").innerHTML = parsed.title;
 			document.getElementById("desc").innerHTML = parsed.overview;
-			showVideo(parsed.Item.trailer_url.replace('/watch?v=', '/embed/'), parsed.poster_url);
+			showVideo(parsed.trailer_url.replace('/watch?v=', '/embed/'), parsed.poster_url);
 		}
 
 		request.send()
